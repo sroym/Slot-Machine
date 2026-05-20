@@ -16,7 +16,7 @@ public class Screen
         var screen =  new List<List<string>>();
         for (int i = 0; i < wheels.Count; i++)
         {
-            int nextPosition = _numberGenerator.Gernerate();
+            int nextPosition = _numberGenerator.Generate();
 
             var column = wheels[i].Concat(wheels[i])
                 .ToList()

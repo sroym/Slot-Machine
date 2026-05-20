@@ -2,5 +2,5 @@ namespace Domain;
 
 public interface INumberGenerator
 {
-    int Gernerate();
+    int Generate();
 }

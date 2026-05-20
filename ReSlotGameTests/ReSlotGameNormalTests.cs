@@ -14,7 +14,7 @@ public class ReSlotGameNormalTests
             new List<string>(){"K", "J", "Q", "10", "A","9"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-        });
+        },new SpecifyNumberGenerator([0, 0 ,0 ,0, 0]), new PayTable());
         var win = slot.Calculate(10);
         Assert.Equal(0, win);
     }
@@ -28,7 +28,7 @@ public class ReSlotGameNormalTests
             new List<string>(){"J", "9", "Q", "10", "A","K"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-        });
+        },new SpecifyNumberGenerator([0, 0 ,0 ,0, 0]), new PayTable());
         var win = slot.Calculate(10);
         Assert.Equal(100, win);
     }
@@ -42,7 +42,7 @@ public class ReSlotGameNormalTests
             new List<string>(){"J", "Q", "10", "K", "A","9"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-        });
+        },new SpecifyNumberGenerator([0, 0 ,0 ,0, 0]), new PayTable());
         var win = slot.Calculate(10);
         Assert.Equal(400, win);
     } 
@@ -56,7 +56,7 @@ public class ReSlotGameNormalTests
             new List<string>(){"J", "Q", "K", "10", "A","9"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-        });
+        },new SpecifyNumberGenerator([0, 0 ,0 ,0, 0]), new PayTable());
         var win = slot.Calculate(10);
         Assert.Equal(1000, win);
     }
