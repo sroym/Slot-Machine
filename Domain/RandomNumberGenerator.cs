@@ -1,10 +1,10 @@
 namespace Domain;
 
-public class RandomNumberGenerator(int uperBound) : INumberGenerator
+public class RandomNumberGenerator(int upperBound) : INumberGenerator
 {
     public int Generate()
     {
         var random = new Random();
-        return random.Next(uperBound);
+        return random.Next(upperBound);
     }
 }

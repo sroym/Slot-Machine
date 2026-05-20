@@ -5,8 +5,8 @@ public class SlotMachine
     private readonly List<List<string>> _wheels;
     private readonly PayTable _payTable;
     private readonly INumberGenerator _numberGenerator;
-    
-    
+
+    private Screen _currentScreen;
     public SlotMachine(List<List<string>> wheels, INumberGenerator numberGenerator,  PayTable payTable)
     {
         if(wheels.Count == 0) throw new ArgumentNullException(nameof(wheels));
@@ -17,8 +17,8 @@ public class SlotMachine
 
     public int Calculate(int bet)
     {
-        var  screen= new Screen(_wheels, _numberGenerator);
-        var odd = _payTable.GetOdd(GetLines(screen._wheels));
+        var  _currentscreen= new Screen(_wheels, _numberGenerator);
+        var odd = _payTable.GetOdd(GetLines(_currentscreen._wheels));//
         return odd * bet;
     }
 
@@ -40,6 +40,11 @@ public class SlotMachine
         }
         
         return sumOfSameLines;
+    }
+
+    public List<List<string>> GetScreen()
+    {
+        return _currentScreen._wheels;
     }
 }
 

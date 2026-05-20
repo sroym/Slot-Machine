@@ -3,7 +3,7 @@ namespace Domain;
 public class Screen
 {
      public List<List<string>> _wheels { get; private set; }
-        private  readonly INumberGenerator _numberGenerator;
+     private  readonly INumberGenerator _numberGenerator;
 
     public Screen(List<List<string>> wheels, INumberGenerator numberGenerator)
     {
