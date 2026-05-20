@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{6FA108A4-2A4E-4BAB-BB37-20ECCCB86098}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReSlotGameTests", "ReSlotGameTests\ReSlotGameTests.csproj", "{272D74CD-9C49-4495-83B2-FE5776ED767C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FA108A4-2A4E-4BAB-BB37-20ECCCB86098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA108A4-2A4E-4BAB-BB37-20ECCCB86098}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA108A4-2A4E-4BAB-BB37-20ECCCB86098}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA108A4-2A4E-4BAB-BB37-20ECCCB86098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{272D74CD-9C49-4495-83B2-FE5776ED767C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{272D74CD-9C49-4495-83B2-FE5776ED767C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{272D74CD-9C49-4495-83B2-FE5776ED767C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{272D74CD-9C49-4495-83B2-FE5776ED767C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
