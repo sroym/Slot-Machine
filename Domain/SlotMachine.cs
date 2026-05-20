@@ -3,7 +3,8 @@
 public class SlotMachine
 {
     private readonly List<List<string>> _wheels;
-
+    private readonly INumberGenerator _numberGenerator;
+    
     public SlotMachine(List<List<string>> wheels)
     {
         _wheels = wheels;
