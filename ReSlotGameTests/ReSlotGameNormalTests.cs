@@ -7,7 +7,7 @@ public class ReSlotGameNormalTests
     [Fact]
     public void Loss()
     {
-        var slot = new ReSlotMachine(new List<List<string>>()
+        var slot = new SlotMachine(new List<List<string>>()
         {
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
