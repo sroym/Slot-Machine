@@ -17,8 +17,8 @@ public class SlotMachine
 
     public int Calculate(int bet)
     {
-        var  _currentscreen= new Screen(_wheels, _numberGenerator);
-        var odd = _payTable.GetOdd(GetLines(_currentscreen._wheels));//
+        _currentScreen= new Screen(_wheels, _numberGenerator);
+        var odd = _payTable.GetOdd(GetLines(_currentScreen._wheels));//
         return odd * bet;
     }
 

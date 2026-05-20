@@ -8,7 +8,7 @@ public class Screen
     public Screen(List<List<string>> wheels, INumberGenerator numberGenerator)
     {
         _numberGenerator = numberGenerator;
-        _wheels = wheels;
+        _wheels = GetScreen(wheels);
     }
 
     private List<List<string>> GetScreen(List<List<string>> wheels)
