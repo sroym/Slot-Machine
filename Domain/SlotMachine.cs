@@ -11,6 +11,26 @@ public class SlotMachine
 
     public int Calculate(int bet)
     {
-        return 0;
+        int lines = GetLines();
+        return lines * bet;
+    }
+
+    private int GetLines()
+    {
+        int sumOfSameLines = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            var hash = new HashSet<string>();
+            foreach (var wheel in _wheels)
+            {
+                hash.Add(wheel[i]);
+            }
+
+            if (hash.Count == 1)
+            {
+                sumOfSameLines++;
+            }
+        }
+        return sumOfSameLines;
     }
 }
