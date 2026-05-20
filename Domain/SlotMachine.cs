@@ -3,27 +3,32 @@
 public class SlotMachine
 {
     private readonly List<List<string>> _wheels;
+    private readonly PayTable _payTable;
     private readonly INumberGenerator _numberGenerator;
     
-    public SlotMachine(List<List<string>> wheels)
+    
+    public SlotMachine(List<List<string>> wheels, INumberGenerator numberGenerator,  PayTable payTable)
     {
+        if(wheels.Count == 0) throw new ArgumentNullException(nameof(wheels));
         _wheels = wheels;
+        _payTable = payTable;
+        _numberGenerator = numberGenerator;
     }
 
     public int Calculate(int bet)
     {
-        var paytable = new PayTable();
-        int lines = GetLines();
-        return paytable.GetOdd(lines) * bet;
+        var  screen= new Screen(_wheels, _numberGenerator);
+        var odd = _payTable.GetOdd(GetLines(screen._wheels));
+        return odd * bet;
     }
 
-    private int GetLines()
+    private int GetLines(List<List<string>> screen)
     {
         int sumOfSameLines = 0;
         for (int i = 0; i < 3; i++)
         {
             var hash = new HashSet<string>();
-            foreach (var wheel in _wheels)
+            foreach (var wheel in screen)
             {
                 hash.Add(wheel[i]);
             }
