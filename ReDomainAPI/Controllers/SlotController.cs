@@ -26,4 +26,4 @@ public class SlotController
     }
 }
 
-public record struct SpinResult(int WinMoney, List<List<string>> Screen);
+public record struct SpinResult(int WinMoney, List<List<string>> Screen, int InitialAmount);
