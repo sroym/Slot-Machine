@@ -1,3 +1,5 @@
+using Domain;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,6 +11,17 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton(new SlotMachine(new List<List<string>>()
+{
+    new List<string>(){"J", "Q", "K", "$", "$", "$"},
+    new List<string>(){"J", "Q", "K", "$", "$", "$"},
+    new List<string>(){"J", "Q", "K", "$", "$", "$"},
+    new List<string>(){"J", "Q", "K", "$", "$", "$"},
+    new List<string>(){"J", "Q", "K", "$", "$", "$"},
+},
+    new RandomNumberGenerator(6),
+    new PayTable()
+    ));
 
 builder.Services.AddCors(options =>
 {

@@ -6,22 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 [Route("[controller]")]
 public class SlotController
 {
+    private readonly SlotMachine _slotMachine;
+
+    public SlotController(SlotMachine slotMachine)
+    {
+        _slotMachine = slotMachine;
+    }
     [HttpPost]
     public SpinResult Spin(int bet)
     {
-        var slot = new SlotMachine(new List<List<string>>()
-        {
-            new List<string>(){"J", "Q", "K", "$", "$","$"},
-            new List<string>(){"J", "Q", "K", "$", "$","$"},
-            new List<string>(){"J", "Q", "K", "$", "$","$"},
-            new List<string>(){"J", "Q", "K", "$", "$","$"},
-            new List<string>(){"J", "Q", "K", "$", "$","$"},
-        },new RandomNumberGenerator(6), new PayTable());
-        var win = slot.Calculate(bet);
+       
+        var win = _slotMachine.Calculate(bet);
         return new SpinResult()
         {
             WinMoney = win,
-            Screen = slot.GetScreen()
+            Screen = _slotMachine.GetScreen()
         };
     }
 }
