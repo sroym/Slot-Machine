@@ -2,13 +2,13 @@ namespace Domain;
 
 public class Screen
 {
-     public List<List<string>> _wheels { get; private set; }
+     public List<List<string>> Wheels { get; private set; }
      private  readonly INumberGenerator _numberGenerator;
 
     public Screen(List<List<string>> wheels, INumberGenerator numberGenerator)
     {
         _numberGenerator = numberGenerator;
-        _wheels = GetScreen(wheels);
+        Wheels = GetScreen(wheels);
     }
 
     private List<List<string>> GetScreen(List<List<string>> wheels)
@@ -20,7 +20,7 @@ public class Screen
 
             var column = wheels[i].Concat(wheels[i])
                 .ToList()
-                .GetRange(nextPosition, 3);
+                .GetRange(nextPosition, 6);
             screen.Add(column);
         }
 
