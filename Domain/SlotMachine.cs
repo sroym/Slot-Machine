@@ -44,7 +44,7 @@ public class SlotMachine
             var hash = new HashSet<string>();
             foreach (var wheel in screen)
             {
-                hash.Add(wheel[i+1]);
+                hash.Add(wheel[i]);
             }
 
             if (hash.Count == 1)

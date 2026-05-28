@@ -16,7 +16,7 @@ public class ReSlotGameNormalTests
             new List<string>(){"K", "J", "Q", "10", "A","9"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-        },new SpecifyNumberGenerator([2, 2, 2, 2, 2]), new PayTable());
+        },new SpecifyNumberGenerator([0, 0 ,0, 0, 0]), new PayTable());
         
         var win = slot.Calculate(10);
         Assert.Equal(0, win);
@@ -28,10 +28,10 @@ public class ReSlotGameNormalTests
         {
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-            new List<string>(){"Q", "9", "10", "9", "A","J"},
+            new List<string>(){"9", "Q", "10", "9", "A","J"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-        },new SpecifyNumberGenerator([2, 2, 2, 2, 2]), new PayTable());
+        },new SpecifyNumberGenerator([0, 0 ,0, 0, 0]), new PayTable());
         var win = slot.Calculate(10);
         Assert.Equal(100, win);
     }
@@ -42,10 +42,10 @@ public class ReSlotGameNormalTests
         {
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-            new List<string>(){"A", "K", "Q", "9", "10","J"},
+            new List<string>(){"A", "Q", "K", "10", "A","9"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-        },new SpecifyNumberGenerator ([2, 2, 2, 2, 2]), new PayTable());
+        },new SpecifyNumberGenerator ([0, 0 ,0 ,0 ,0]), new PayTable());
         var win = slot.Calculate(10);
         Assert.Equal(400, win);
     } 
@@ -56,10 +56,10 @@ public class ReSlotGameNormalTests
         {
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-            new List<string>(){"K", "J", "Q", "9", "10","A"},
+            new List<string>(){"J", "Q", "K", "10", "A","9"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-        },new SpecifyNumberGenerator ([2, 2, 2, 2, 2]), new PayTable());
+        },new SpecifyNumberGenerator ([0, 0, 0, 0, 0]), new PayTable());
         var user = User.FromToken("token", new FakeUserRepository());
         user.Spin(slot, 10);
         Assert.Equal(1990, user.GetMoney());
@@ -79,7 +79,7 @@ public class ReSlotGameNormalTests
             new List<string>(){"K", "J", "Q", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
-        },new SpecifyNumberGenerator ([2, 2, 2, 2, 2]), new PayTable());
+        },new SpecifyNumberGenerator ([0, 0, 0, 0, 0]), new PayTable());
         var user = User.FromToken("token", new FakeUserRepository());
         Assert.ThrowsAny<Exception>(() => user.Spin(slot,10000));
     }
