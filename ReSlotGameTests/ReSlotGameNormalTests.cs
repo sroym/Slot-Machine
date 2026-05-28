@@ -1,4 +1,6 @@
-﻿namespace ReSlotGameTests;
+﻿using Domain.Gateway;
+
+namespace ReSlotGameTests;
 
 using Domain;
 
@@ -58,7 +60,37 @@ public class ReSlotGameNormalTests
             new List<string>(){"J", "Q", "K", "9", "10","A"},
             new List<string>(){"J", "Q", "K", "9", "10","A"},
         },new SpecifyNumberGenerator ([2, 2, 2, 2, 2]), new PayTable());
-        var win = slot.Calculate(10);
-        Assert.Equal(1000, win);
+        var user = User.FromToken("token", new FakeUserRepository());
+        user.Spin(slot, 10);
+        Assert.Equal(1990, user.GetMoney());
+        // var win = slot.Calculate(10);
+        // Assert.Equal(1000, win);
+        // Assert.Equal(1090, slot.GetAmount());
+    }
+    
+    
+    [Fact]
+    public void should_throw_when_not_amount()
+    {
+        var slot = new SlotMachine(new List<List<string>>()
+        {
+            new List<string>(){"J", "Q", "K", "9", "10","A"},
+            new List<string>(){"J", "Q", "K", "9", "10","A"},
+            new List<string>(){"K", "J", "Q", "9", "10","A"},
+            new List<string>(){"J", "Q", "K", "9", "10","A"},
+            new List<string>(){"J", "Q", "K", "9", "10","A"},
+        },new SpecifyNumberGenerator ([2, 2, 2, 2, 2]), new PayTable());
+        var user = User.FromToken("token", new FakeUserRepository());
+        Assert.ThrowsAny<Exception>(() => user.Spin(slot,10000));
+    }
+}
+
+public class FakeUserRepository : UserRepositoryGateway
+{
+    public User FindFromToken(string token)
+    {
+        var user = new User("Roy");
+        user.SetBet(1000);
+        return user;
     }
 }

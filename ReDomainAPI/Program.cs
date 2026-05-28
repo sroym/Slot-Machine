@@ -11,17 +11,31 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton(new SlotMachine(new List<List<string>>()
+
+
+builder.Services.AddSingleton<User>(_ =>
 {
-    new List<string>(){"J", "Q", "K", "$", "$", "$"},
-    new List<string>(){"J", "Q", "K", "$", "$", "$"},
-    new List<string>(){"J", "Q", "K", "$", "$", "$"},
-    new List<string>(){"J", "Q", "K", "$", "$", "$"},
-    new List<string>(){"J", "Q", "K", "$", "$", "$"},
-},
-    new RandomNumberGenerator(6),
-    new PayTable()
-    ));
+    var user = new User("Roy");
+    user.SetBet(1000);
+    return user;
+});
+
+builder.Services.AddSingleton<SlotMachine>(_ =>
+{
+    var slot = new SlotMachine(new List<List<string>>()
+        {
+            new List<string>() { "J", "Q", "K", "$", "$", "$" },
+            new List<string>() { "J", "Q", "K", "$", "$", "$" },
+            new List<string>() { "J", "Q", "K", "$", "$", "$" },
+            new List<string>() { "J", "Q", "K", "$", "$", "$" },
+            new List<string>() { "J", "Q", "K", "$", "$", "$" },
+        },
+        new RandomNumberGenerator(6),
+        new PayTable()); 
+        return slot; 
+}
+    );
+
 
 builder.Services.AddCors(options =>
 {

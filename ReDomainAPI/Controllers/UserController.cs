@@ -8,28 +8,24 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
-public class SlotController: ControllerBase
+public class UserController: ControllerBase
 {
-    private readonly SlotMachine _slotMachine;
     private readonly User _user;
 
-    public SlotController(SlotMachine slotMachine, User user)
+    public UserController(User user)
     {
-        _slotMachine = slotMachine;
         _user = user;
     }
-    
-    [HttpPost]
-    public ActionResult<SpinResult> Spin(int bet)
+
+    [HttpGet]
+    public ActionResult<UserResponse> Get(int bet)
     {
         try
         {
-            _user.Spin(_slotMachine, bet);
-
-            return Ok(new SpinResult()
+            return Ok(new UserResponse()
             {
+                name = _user.GetName(),
                 userMoney = _user.GetMoney(),
-                Screen = _slotMachine.GetScreen()
             });
         }
         catch (Exception e)
@@ -40,4 +36,4 @@ public class SlotController: ControllerBase
     
 }
 
-public record struct SpinResult(int userMoney, List<List<string>> Screen, int Balance);
+public record struct UserResponse(string name, int userMoney);
