@@ -1,11 +1,13 @@
 using System.Runtime.InteropServices.JavaScript;
 using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ReDomainAPI.Controllers;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class SlotController: ControllerBase
