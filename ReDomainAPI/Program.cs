@@ -12,6 +12,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton(new LoginService("my-secret-key-is-long-enough-32chars!"));
+
 
 builder.Services.AddSingleton<User>(_ =>
 {

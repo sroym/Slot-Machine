@@ -10,4 +10,12 @@ public class LoginTests
         Assert.NotNull(token);
         Assert.NotEmpty(token);
     }
+
+    [Fact]
+
+    public void Login_WithWrong_Credentials()
+    {
+        var loginService = new LoginService("my-secret-key-is-long-enough=32chars!");
+        Assert.ThrowsAny<Exception>(() => loginService.Login("Roy", "wrongpassword"));
+    }
 }
