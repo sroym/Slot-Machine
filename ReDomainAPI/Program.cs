@@ -2,7 +2,6 @@ using System.Text;
 using Domain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -25,6 +24,7 @@ builder.Services.AddOpenApi();
 
 
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton(new LoginService("my-secret-key-is-long-enough-32chars!"));
