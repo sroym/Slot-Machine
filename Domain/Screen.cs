@@ -20,7 +20,7 @@ public class Screen
 
             var column = wheels[i].Concat(wheels[i])
                 .ToList()
-                .GetRange(nextPosition, 6);
+                .GetRange(nextPosition, 3);
             screen.Add(column);
         }
 

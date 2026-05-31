@@ -18,7 +18,7 @@ public class UserController: ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<UserResponse> Get(int bet)
+    public ActionResult<UserResponse> Get()
     {
         try
         {

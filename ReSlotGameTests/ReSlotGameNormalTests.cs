@@ -83,6 +83,23 @@ public class ReSlotGameNormalTests
         var user = User.FromToken("token", new FakeUserRepository());
         Assert.ThrowsAny<Exception>(() => user.Spin(slot,10000));
     }
+
+    [Fact]
+    public void AllIn()
+    {
+        var slot = new SlotMachine(new List<List<string>>()
+        {
+            
+            new List<string>(){"J", "Q", "K", "9", "10","A"},
+            new List<string>(){"J", "Q", "K", "9", "10","A"},
+            new List<string>(){"K", "J", "Q", "9", "10","A"},
+            new List<string>(){"J", "Q", "K", "9", "10","A"},
+            new List<string>(){"J", "Q", "K", "9", "10","A"},
+        },new SpecifyNumberGenerator([0, 0, 0, 0, 0]),new PayTable());
+        var user = User.FromToken("token", new FakeUserRepository());
+        user.Spin(slot, 1000);
+        Assert.Equal(0, user.GetMoney());
+    }
 }
 
 public class FakeUserRepository : UserRepositoryGateway

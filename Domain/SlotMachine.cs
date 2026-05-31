@@ -19,6 +19,7 @@ public class SlotMachine
 
     // 靜態工廠
     public static SlotMachine Restore(
+        
         string token,
         User user,
         WheelsRepositoryGateway wheelsRepository,
@@ -36,21 +37,19 @@ public class SlotMachine
         return odd * bet;
     }
 
-    private int GetLines(List<List<string>> screen)
+    private int GetLines(List<List<string>> screenWheels)
     {
         int sumOfSameLines = 0;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < screenWheels[0].Count; i++)
         {
             var hash = new HashSet<string>();
-            foreach (var wheel in screen)
+            foreach (var wheel in screenWheels)
             {
                 hash.Add(wheel[i]);
             }
 
             if (hash.Count == 1)
-            {
                 sumOfSameLines++;
-            }
         }
         
         return sumOfSameLines;
