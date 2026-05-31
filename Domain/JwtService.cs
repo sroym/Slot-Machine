@@ -29,6 +29,21 @@ public class JwtService
             expires: DateTime.UtcNow.AddHours(1),
             signingCredentials: credentials
             );
-        return new JwtSecurityTokenHandler().WriteToken(new JwtSecurityToken());
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public string  ValidateToken(string token)
+    {
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
+        var tokenHandler = new JwtSecurityTokenHandler();
+        tokenHandler.ValidateToken(token, new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = key,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+        }, out SecurityToken validatedToken);
+        var jwtToken = (JwtSecurityToken)validatedToken;
+        return jwtToken.Claims.First(x => x.Type == ClaimTypes.Name).Value;
     }
 }
