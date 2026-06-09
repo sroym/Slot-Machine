@@ -16,11 +16,11 @@ public class LoginController:ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<string> Login(string username, string password)
+    public ActionResult<string> Login([FromBody] LoginRequest request)
     {
         try
         {
-            var token = _loginService.Login(username, password);
+            var token = _loginService.Login(request.UserName, request.Password);
             return Ok(token);
         }
         catch (Exception e){
@@ -28,4 +28,9 @@ public class LoginController:ControllerBase
     }
     
 }
+    public class LoginRequest
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
 }

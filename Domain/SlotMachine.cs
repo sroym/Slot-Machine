@@ -17,7 +17,6 @@ public class SlotMachine
         _numberGenerator = numberGenerator;
     }
 
-    // 靜態工廠
     public static SlotMachine Restore(
         
         string token,
