@@ -5,7 +5,7 @@ public class LoginTests
     [Fact]
     public void Login_WithCorrect_Credentials()
     {
-        var loginService = new LoginService("my-secret-key-is-long-enough=32chars!");
+        var loginService = new LoginService("my-secret-key-is-long-enough-32chars!");
         var token = loginService.Login("Roy", "password7777");
         Assert.NotNull(token);
         Assert.NotEmpty(token);
@@ -15,7 +15,7 @@ public class LoginTests
 
     public void Login_WithWrong_Credentials()
     {
-        var loginService = new LoginService("my-secret-key-is-long-enough=32chars!");
+        var loginService = new LoginService("my-secret-key-is-long-enough-32chars!");
         Assert.ThrowsAny<Exception>(() => loginService.Login("Roy", "wrongpassword"));
     }
 }
