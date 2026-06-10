@@ -19,4 +19,12 @@ public class JwtTests
         var userName = jwtService.ValidateToken(token);
         Assert.Equal("Roy", userName);
     }
+    
+    [Fact]
+    public void ValidateToken_WithExpiredToken_ShouldThrow()
+    {
+        var jwtService = new JwtService("my-secret-key-is-long-enough-32chars!");
+        var token = jwtService.GenerateToken("Roy");
+        Assert.ThrowsAny<Exception>(() => jwtService.ValidateToken(token, DateTime.UtcNow.AddHours(2)));
+    }
 }

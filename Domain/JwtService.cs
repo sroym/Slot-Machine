@@ -32,7 +32,7 @@ public class JwtService
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-    public string  ValidateToken(string token)
+    public string  ValidateToken(string token, DateTime? now = null)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -42,6 +42,11 @@ public class JwtService
             IssuerSigningKey = key,
             ValidateIssuer = false,
             ValidateAudience = false,
+            LifetimeValidator = (notBefore, expires, securityToken, parameters) =>
+            {
+                var currenTime = now ?? DateTime.UtcNow;
+                return expires > currenTime;
+            }
         }, out SecurityToken validatedToken);
         var jwtToken = (JwtSecurityToken)validatedToken;
         return jwtToken.Claims.First(x => x.Type == ClaimTypes.Name).Value;

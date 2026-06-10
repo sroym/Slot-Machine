@@ -63,9 +63,7 @@ public class ReSlotGameNormalTests
         var user = User.FromToken("token", new FakeUserRepository());
         user.Spin(slot, 10);
         Assert.Equal(1990, user.GetMoney());
-        // var win = slot.Calculate(10);
-        // Assert.Equal(1000, win);
-        // Assert.Equal(1090, slot.GetAmount());
+
     }
     
     
