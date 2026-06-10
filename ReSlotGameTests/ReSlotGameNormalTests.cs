@@ -98,6 +98,36 @@ public class ReSlotGameNormalTests
         user.Spin(slot, 1000);
         Assert.Equal(0, user.GetMoney());
     }
+    [Fact]
+    public void should_throw_when_bet_is_zero()
+    {
+        var user = new User("Roy");
+        user.SetBet(1000);
+        var slot = new SlotMachine(
+            new List<List<string>>() {
+                new List<string>() { "7", "7", "7" },
+                new List<string>() { "7", "7", "7" },
+                new List<string>() { "7", "7", "7" },
+                new List<string>() { "7", "7", "7" },
+                new List<string>() { "7", "7", "7" },
+            },new SpecifyNumberGenerator([0, 0, 0, 0, 0]), new PayTable());
+        Assert.ThrowsAny<Exception>(() => user.Spin(slot, 0));
+    }
+    [Fact]
+    public void should_throw_when_bet_is_negative()
+    {
+        var user = new User("Roy");
+        user.SetBet(1000);
+        var slot = new SlotMachine(
+            new List<List<string>>() {
+                new List<string>() { "7", "7", "7" },
+                new List<string>() { "7", "7", "7" },
+                new List<string>() { "7", "7", "7" },
+                new List<string>() { "7", "7", "7" },
+                new List<string>() { "7", "7", "7" },
+            },new SpecifyNumberGenerator([0, 0, 0, 0, 0]), new PayTable());
+        Assert.ThrowsAny<Exception>(() => user.Spin(slot, -10));
+    }
 }
 
 public class FakeUserRepository : UserRepositoryGateway

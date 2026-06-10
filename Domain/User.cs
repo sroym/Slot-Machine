@@ -25,8 +25,8 @@ public class User
     public void Spin(SlotMachine slot, int bet)
     {
         if(bet <=0)throw new Exception("投點錢好嗎?");
-        _money -= bet;
         if (_money < 0) throw new Exception("沒錢還想玩?");
+        _money -= bet;
         var win = slot.Calculate(bet);
         _money += win;
     }
