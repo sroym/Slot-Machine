@@ -2,9 +2,9 @@ namespace Domain;
 
 public class Screen
 {
-     public List<List<string>> Wheels { get; private set; }
-     public List<int> StopIndexes { get; private set; }
-     private  readonly INumberGenerator _numberGenerator;
+    public List<List<string>> Wheels { get; private set; }
+    public List<int> StopIndexes { get; private set; }
+    private  readonly INumberGenerator _numberGenerator;
 
     public Screen(List<List<string>> wheels, INumberGenerator numberGenerator)
     {
