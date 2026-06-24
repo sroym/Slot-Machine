@@ -8,6 +8,6 @@ public class SqlUserRepository : UserRepositoryGateway
 {
     public User FindFromToken(string token)
     {
-        throw new NotFoundUserException("");
+        return null;
     }
 }

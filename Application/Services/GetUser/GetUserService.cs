@@ -1,8 +1,9 @@
+using Application.Exceptions;
 using Domain;
 using Domain.Gateway;
-namespace Application;
+namespace Application.Services.GetUser;
 
-public class GetUserService
+public class GetUserService: IGetUserService
 {
     private readonly UserRepositoryGateway _userRepository;
 
@@ -11,8 +12,8 @@ public class GetUserService
         _userRepository = userRepository;
     }
 
-    public User GetUser(string token)
+    public User GetUser()
     {
-        throw new NotImplementedException();
+        throw new NotFoundUserException();
     }
 }

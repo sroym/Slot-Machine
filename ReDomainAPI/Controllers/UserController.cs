@@ -1,3 +1,6 @@
+using Application;
+using Application.Exceptions;
+using Application.Services.GetUser;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ReDomainAPI.Controllers;
@@ -7,29 +10,20 @@ using Microsoft.AspNetCore.Mvc;
 [Authorize]
 [ApiController]
 [Route("[controller]")]
-public class UserController: ControllerBase
+public class UserController(IGetUserService getUserService) : ControllerBase
 {
-    private readonly User _user;
-
-    public UserController(User user)
-    {
-        _user = user;
-    }
-
+    
     [HttpGet]
     public ActionResult<UserResponse> Get()
     {
         try
         {
-            return Ok(new UserResponse()
-            {
-                name = _user.GetName(),
-                userMoney = _user.GetMoney(),
-            });
+            getUserService.GetUser();
+            return Ok();
         }
-        catch (Exception e)
+        catch (NotFoundUserException)
         {
-            return BadRequest(e.Message);
+            return BadRequest("User not found");
         }
     }
     
