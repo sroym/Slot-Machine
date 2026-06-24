@@ -18,8 +18,8 @@ public class UserController(IGetUserService getUserService) : ControllerBase
     {
         try
         {
-            getUserService.GetUser();
-            return Ok();
+            var res = getUserService.GetUser();
+            return Ok(res);
         }
         catch (NotFoundUserException)
         {
