@@ -29,4 +29,3 @@ public class UserController(IGetUserService getUserService) : ControllerBase
     
 }
 
-public record struct UserResponse(string name, int userMoney);

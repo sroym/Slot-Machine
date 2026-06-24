@@ -12,8 +12,9 @@ public class GetUserService: IGetUserService
         _userRepository = userRepository;
     }
 
-    public User GetUser()
+    public UserResponse GetUser()
     {
+        return null;
         throw new NotFoundUserException();
     }
 }

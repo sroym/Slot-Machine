@@ -24,4 +24,17 @@ public class GetUserControllerTests
         
         Assert.True(res.Result is BadRequestObjectResult);
     }
+    
+    
+    [Fact]
+    public void 回傳狀態碼200()
+    {
+        var mockService = new Mock<IGetUserService>();
+        mockService.Setup(r => r.GetUser()).Returns(new UserResponse("", 1));
+        var controller = new UserController(mockService.Object);
+        
+        var res = controller.Get();
+        
+        Assert.True(res.Result is OkResult);
+    }
 }

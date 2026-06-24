@@ -1,8 +1,11 @@
 using Domain;
+using Domain.Gateway;
 
 namespace Application.Services.GetUser;
 
 public interface IGetUserService
 {
-    User GetUser();
+    UserResponse GetUser();
 }
+
+public record UserResponse(string Name, int UserMoney);
