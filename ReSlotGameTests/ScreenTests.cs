@@ -15,6 +15,6 @@ public class ScreenTests
             new List<string>() { "J", "Q", "K", "$", "$", "$" },
         };
         var screen = new Screen(wheels, new SpecifyNumberGenerator([2, 0 ,4 ,1 ,3]));
-        Assert.Equal(new List<int>() {2, 0, 4, 1, 3}, screen.GetStopIndexs());
+        Assert.Equal(new List<int>() {2, 0, 4, 1, 3}, screen.GetStopIndexes());
     }
 }
