@@ -38,11 +38,11 @@ builder.Services.AddSingleton<SlotMachine>(_ =>
 {
     var slot = new SlotMachine(new List<List<string>>()
         {
-            new List<string>() { "J", "Q", "K", "$", "$", "$" },
-            new List<string>() { "J", "Q", "K", "$", "$", "$" },
-            new List<string>() { "J", "Q", "K", "$", "$", "$" },
-            new List<string>() { "J", "Q", "K", "$", "$", "$" },
-            new List<string>() { "J", "Q", "K", "$", "$", "$" },
+            new List<string>() { "J", "$", "K", "$", "Q", "$" },
+            new List<string>() { "J", "$", "K", "$", "Q", "$" },
+            new List<string>() { "J", "$", "K", "$", "Q", "$" },
+            new List<string>() { "J", "$", "K", "$", "Q", "$" },
+            new List<string>() { "J", "$", "K", "$", "Q", "$" },
         },
         new RandomNumberGenerator(6),
         new PayTable()); 

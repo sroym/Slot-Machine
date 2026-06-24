@@ -8,11 +8,11 @@ public class ScreenTests
     {
         var wheels = new List<List<string>>()
         {
-            new List<string>() { "J", "Q", "K", "$", "$", "$" },
-            new List<string>() { "J", "Q", "K", "$", "$", "$" },
-            new List<string>() { "J", "Q", "K", "$", "$", "$" },
-            new List<string>() { "J", "Q", "K", "$", "$", "$" },
-            new List<string>() { "J", "Q", "K", "$", "$", "$" },
+            new List<string>() { "J", "$", "K", "$", "Q", "$" },
+            new List<string>() { "J", "$", "K", "$", "Q", "$" },
+            new List<string>() { "J", "$", "K", "$", "Q", "$" },
+            new List<string>() { "J", "$", "K", "$", "Q", "$" },
+            new List<string>() { "J", "$", "K", "$", "Q", "$" },
         };
         var screen = new Screen(wheels, new SpecifyNumberGenerator([2, 0 ,4 ,1 ,3]));
         Assert.Equal(new List<int>() {2, 0, 4, 1, 3}, screen.GetStopIndexes());

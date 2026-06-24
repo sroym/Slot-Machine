@@ -1,7 +1,4 @@
-using System.Runtime.InteropServices.JavaScript;
-using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ReDomainAPI.Controllers;
 using Domain;
@@ -31,7 +28,8 @@ public class SlotController: ControllerBase
             return Ok(new SpinResult()
             {
                 userMoney = _user.GetMoney(),
-                Screen = _slotMachine.GetScreen()
+                Screen = _slotMachine.GetScreen(),
+                StopIndexes = _slotMachine.GetStopIndexes(),
             });
         }
         catch (Exception e)
@@ -42,4 +40,4 @@ public class SlotController: ControllerBase
     
 }
 
-public record struct SpinResult(int userMoney, List<List<string>> Screen, int Balance);
+public record struct SpinResult(int userMoney, List<List<string>> Screen, List<int>StopIndexes);

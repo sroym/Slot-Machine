@@ -58,27 +58,8 @@ public class SlotMachine
     {
         return _currentScreen.Wheels;
     }
-}
-
-
-
-class Player
-{
-    public string Name;
-    public int Level;
-    public string Role;
-
-    private Player(string name, int level, string role)
+    public List<int> GetStopIndexes()
     {
-        Name = name;
-        Level = level;
-        Role = role;
+        return _currentScreen.GetStopIndexes();
     }
-
-    public static Player CreateWarrior(string name)
-    {
-        if (name == "") throw new Exception("name cannot be empty");
-        return new Player(name, 1, "Warrior");
-    }
-    
 }
