@@ -5,20 +5,18 @@ namespace ReDomainAPI.Middlewares;
 public class UserMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly UserRepositoryGateway _userRepository;
 
-    public UserMiddleware(RequestDelegate next, UserRepositoryGateway userRepository)
+    public UserMiddleware(RequestDelegate next, UserRepositoryGateway mockRepoObject)
     {
         _next = next;
-        _userRepository = userRepository;
     }
 
-    public async Task Invoke(HttpContext context)
+    public async Task Invoke(HttpContext context, UserRepositoryGateway userRepository)
     {
         var username = context.User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value;
         if (username != null)
         {
-            var user = _userRepository.FindFromToken(username);
+            var user = userRepository.FindFromToken(username);
             context.Items["User"] = user;
         }
         await _next(context);

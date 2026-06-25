@@ -1,7 +1,5 @@
 using Application.Exceptions;
 using Application.Services.GetUser;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using ReDomainAPI.Controllers;

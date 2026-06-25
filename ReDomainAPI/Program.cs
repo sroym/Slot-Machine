@@ -1,5 +1,9 @@
 using System.Text;
+using Application.Services.GetUser;
 using Domain;
+using Domain.Gateway;
+using Infrastructure;
+using ReDomainAPI.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +27,10 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<UserRepositoryGateway, SqlUserRepository>();
+builder.Services.AddScoped<IGetUserService, GetUserService>();
 
 builder.Services.AddSingleton(new LoginService("my-secret-key-is-long-enough-32chars!"));
 
@@ -81,7 +89,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-
+app.UseMiddleware<UserMiddleware>();
 
 app.MapControllers();
 

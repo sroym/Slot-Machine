@@ -24,7 +24,7 @@ public class UserMiddlewareTests
         context.User = new System.Security.Claims.ClaimsPrincipal(identity);
         
         var middleware = new UserMiddleware(_ => Task.CompletedTask, mockRepo.Object);
-        await middleware.Invoke(context);
+        await middleware.Invoke(context, mockRepo.Object);
         
         Assert.Equal(user, context.Items["User"]);
     }
@@ -36,7 +36,7 @@ public class UserMiddlewareTests
         var context = new DefaultHttpContext();
         
         var middleware = new UserMiddleware(_ => Task.CompletedTask, mockRepo.Object);
-        await middleware.Invoke(context);
+        await middleware.Invoke(context, mockRepo.Object);
         
         Assert.Null(context.Items["User"]);
         mockRepo.Verify(r => r.FindFromToken(It.IsAny<string>()), Times.Never);
