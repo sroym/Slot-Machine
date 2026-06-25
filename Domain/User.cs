@@ -22,7 +22,7 @@ public class User
         _money = money;
     }
 
-    public void Spin(SlotMachine slot, int bet)
+    public void Spin(ISlotMachine slot, int bet)
     {
         if(bet <=0)throw new Exception("投點錢好嗎?");
         if (_money < bet) throw new Exception("沒錢還想玩?");

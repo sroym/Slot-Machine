@@ -138,4 +138,10 @@ public class FakeUserRepository : UserRepositoryGateway
         user.SetBet(1000);
         return user;
     }
+    public User FindFromUsername(string username)
+    {
+        var user = new User("Roy");
+        user.SetBet(1000);
+        return user;
+    }
 }

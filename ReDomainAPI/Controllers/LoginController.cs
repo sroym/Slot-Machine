@@ -1,3 +1,4 @@
+using Application.Services.Login;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ReDomainAPI.Controllers;
@@ -8,15 +9,15 @@ using Domain;
 [Route("[controller]")]
 public class LoginController:ControllerBase
 {
-    private readonly LoginService _loginService;
+    private readonly ILoginApplicationService _loginService;
     
-    public LoginController(LoginService loginService)
+    public LoginController(ILoginApplicationService loginService)
     {
         _loginService = loginService;
     }
 
     [HttpPost]
-    public ActionResult<string> Login([FromBody] LoginRequest request)
+    public IActionResult Login([FromBody] LoginRequest request)
     {
         try
         {

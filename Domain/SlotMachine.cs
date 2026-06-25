@@ -2,7 +2,7 @@
 
 namespace Domain;
 
-public class SlotMachine
+public class SlotMachine :  ISlotMachine
 {
     private readonly List<List<string>> _wheels;
     private readonly PayTable _payTable;

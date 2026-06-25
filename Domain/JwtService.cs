@@ -5,7 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-public class JwtService
+public class JwtService : IJwtService
 {
     private readonly string _secretKey;
 

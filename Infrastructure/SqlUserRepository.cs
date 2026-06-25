@@ -10,4 +10,8 @@ public class SqlUserRepository : UserRepositoryGateway
     {
         return null;
     }
+    public User FindFromUsername(string username)
+    {
+        return null;
+    }
 }
