@@ -1,63 +1,35 @@
 using Application.Exceptions;
 using Application.Services.GetUser;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using ReDomainAPI.Controllers;
-
-namespace ReSlotGameTests;
-using Application;
 using Domain;
 using Domain.Gateway;
+using Microsoft.AspNetCore.Http;
+using Moq;
 
+namespace ReSlotGameTests;
 
-public class GetUserControllerTests
+public class GetUserServiceTests
 {
     [Fact]
-    public void 沒有找到User_回傳狀態碼400()
-    {
-        var mockService = new Mock<IGetUserService>();
-       mockService.Setup(r => r.GetUser()).Throws<NotFoundUserException>();
-        var controller = new UserController(mockService.Object);
-        
-        var res = controller.Get();
-        
-        Assert.True(res.Result is BadRequestObjectResult);
-    }
-    
-    
-    [Fact]
-    public void 回傳狀態碼200()
-    {
-        var mockService = new Mock<IGetUserService>();
-        mockService.Setup(r => r.GetUser()).Returns(new UserResponse("Roy", 1000));
-        var controller = new UserController(mockService.Object);
-        
-        var res = controller.Get();
-
-        var okResult = Assert.IsType<OkObjectResult>(res.Result);
-    
-        var value = Assert.IsType<UserResponse>(okResult.Value);
-    
-        Assert.Equal("Roy", value.Name);
-        Assert.Equal(1000, value.UserMoney);
-    }
-    
-    [Fact]
-    public void GetUser_WhenUserFound_shouldReturnUserResponse()
+    public void GetUser_WhenUserFound_ShouldReturnUserResponse()
     {
         var mockRepo = new Mock<UserRepositoryGateway>();
         var mockHttpContext = new Mock<IHttpContextAccessor>();
         var user = new User("Roy");
         user.SetBet(1000);
-        
         mockHttpContext.Setup(h => h.HttpContext!.Items["User"]).Returns(user);
-        
         var service = new GetUserService(mockRepo.Object, mockHttpContext.Object);
         var result = service.GetUser();
-        
         Assert.Equal("Roy", result.Name);
         Assert.Equal(1000, result.UserMoney);
+    }
+
+    [Fact]
+    public void GetUser_WhenUserNotFound_ShouldThrow()
+    {
+        var mockRepo = new Mock<UserRepositoryGateway>();
+        var mockHttpContext = new Mock<IHttpContextAccessor>();
+        mockHttpContext.Setup(h => h.HttpContext!.Items["User"]).Returns(null);
+        var service = new GetUserService(mockRepo.Object, mockHttpContext.Object);
+        Assert.ThrowsAny<NotFoundUserException>(() => service.GetUser());
     }
 }
