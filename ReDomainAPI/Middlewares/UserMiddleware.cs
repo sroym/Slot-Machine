@@ -6,7 +6,7 @@ public class UserMiddleware
 {
     private readonly RequestDelegate _next;
 
-    public UserMiddleware(RequestDelegate next, UserRepositoryGateway mockRepoObject)
+    public UserMiddleware(RequestDelegate next)
     {
         _next = next;
     }

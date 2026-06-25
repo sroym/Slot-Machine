@@ -35,6 +35,16 @@ public class LoginApplicationServiceTests
         var service = new LoginApplicationService(mockRepo.Object, mockJwt.Object);
         Assert.ThrowsAny<NotFoundUserException>(() => service.Login("WrongUser", "password7777"));
     }
+    [Fact]
+    public void Login_WithWrongPassword_ShouldThrow()
+    {
+        var mockRepo = new Mock<UserRepositoryGateway>();
+        var mockJwt = new Mock<IJwtService>();
+        mockRepo.Setup(r => r.FindFromUsernameAndPassword("Roy", "wrongpassword")).Returns((User)null);
+    
+        var service = new LoginApplicationService(mockRepo.Object, mockJwt.Object);
+        Assert.ThrowsAny<NotFoundUserException>(() => service.Login("Roy", "wrongpassword"));
+    }
 }
 
 

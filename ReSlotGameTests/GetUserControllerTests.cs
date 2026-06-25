@@ -5,10 +5,6 @@ using Moq;
 using ReDomainAPI.Controllers;
 
 namespace ReSlotGameTests;
-using Application;
-using Domain;
-using Domain.Gateway;
-
 
 public class GetUserControllerTests
 {
