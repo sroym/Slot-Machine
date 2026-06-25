@@ -1,43 +1,32 @@
+using Application.Services.Spin;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ReDomainAPI.Controllers;
-using Domain;
-using Microsoft.AspNetCore.Mvc;
 
 [Authorize]
 [ApiController]
 [Route("[controller]")]
-public class SlotController: ControllerBase
+public class SlotController : ControllerBase
 {
-    private readonly SlotMachine _slotMachine;
-    private readonly User _user;
+    private readonly ISpinService _spinService;
 
-    public SlotController(SlotMachine slotMachine, User user)
+    public SlotController(ISpinService spinService)
     {
-        _slotMachine = slotMachine;
-        _user = user;
+        _spinService = spinService;
     }
-    
+
     [HttpPost]
-    public ActionResult<SpinResult> Spin(int bet)
+    public IActionResult Spin(int bet)
     {
         try
         {
-            _user.Spin(_slotMachine, bet);
-
-            return Ok(new SpinResult()
-            {
-                userMoney = _user.GetMoney(),
-                Screen = _slotMachine.GetScreen(),
-                StopIndexes = _slotMachine.GetStopIndexes(),
-            });
+            var result = _spinService.Spin(bet);
+            return Ok(result);
         }
         catch (Exception e)
         {
             return BadRequest(e.Message);
         }
     }
-    
 }
-
-public record struct SpinResult(int userMoney, List<List<string>> Screen, List<int>StopIndexes);

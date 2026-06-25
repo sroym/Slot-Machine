@@ -16,7 +16,7 @@ public class UserMiddleware
         var username = context.User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value;
         if (username != null)
         {
-            var user = userRepository.FindFromToken(username);
+            var user = userRepository.FindFromUsername(username);
             context.Items["User"] = user;
         }
         await _next(context);

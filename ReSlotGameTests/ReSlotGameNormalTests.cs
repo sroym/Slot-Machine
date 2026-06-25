@@ -132,12 +132,6 @@ public class ReSlotGameNormalTests
 
 public class FakeUserRepository : UserRepositoryGateway
 {
-    public User FindFromToken(string token)
-    {
-        var user = new User("Roy");
-        user.SetBet(1000);
-        return user;
-    }
     public User FindFromUsername(string username)
     {
         var user = new User("Roy");

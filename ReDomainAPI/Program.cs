@@ -6,6 +6,8 @@ using Infrastructure;
 using ReDomainAPI.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Application.Services.Login;
+using Application.Services.Spin;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -27,12 +29,26 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ILoginApplicationService, LoginApplicationService>();
+builder.Services.AddScoped<ISpinService, SpinService>();
+builder.Services.AddScoped<ISlotMachine>(_ => new SlotMachine(
+    new List<List<string>>()
+    {
+        new List<string>() { "J", "$", "K", "$", "Q", "$" },
+        new List<string>() { "J", "$", "K", "$", "Q", "$" },
+        new List<string>() { "J", "$", "K", "$", "Q", "$" },
+        new List<string>() { "J", "$", "K", "$", "Q", "$" },
+        new List<string>() { "J", "$", "K", "$", "Q", "$" },
+    },
+    new RandomNumberGenerator(6),
+    new PayTable()
+));
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<UserRepositoryGateway, SqlUserRepository>();
 builder.Services.AddScoped<IGetUserService, GetUserService>();
 
-builder.Services.AddSingleton(new LoginService("my-secret-key-is-long-enough-32chars!"));
+builder.Services.AddSingleton<IJwtService>(new JwtService("my-secret-key-is-long-enough-32chars!"));
 
 
 builder.Services.AddSingleton<User>(_ =>
@@ -41,23 +57,6 @@ builder.Services.AddSingleton<User>(_ =>
     user.SetBet(1000);
     return user;
 });
-
-builder.Services.AddSingleton<SlotMachine>(_ =>
-{
-    var slot = new SlotMachine(new List<List<string>>()
-        {
-            new List<string>() { "J", "$", "K", "$", "Q", "$" },
-            new List<string>() { "J", "$", "K", "$", "Q", "$" },
-            new List<string>() { "J", "$", "K", "$", "Q", "$" },
-            new List<string>() { "J", "$", "K", "$", "Q", "$" },
-            new List<string>() { "J", "$", "K", "$", "Q", "$" },
-        },
-        new RandomNumberGenerator(6),
-        new PayTable()); 
-        return slot; 
-}
-    );
-
 
 builder.Services.AddCors(options =>
 {

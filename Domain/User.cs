@@ -14,7 +14,7 @@ public class User
 
     public static User FromToken(string token, UserRepositoryGateway userRepo)
     {
-        return userRepo.FindFromToken(token);
+        return userRepo.FindFromUsername(token);
     }
 
     public void SetBet(int money)

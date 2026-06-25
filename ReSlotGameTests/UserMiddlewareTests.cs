@@ -14,7 +14,7 @@ public class UserMiddlewareTests
     {
         var mockRepo = new Mock<UserRepositoryGateway>();
         var user = new User("Roy");
-        mockRepo.Setup(r => r.FindFromToken("Roy")).Returns(user);
+        mockRepo.Setup(r => r.FindFromUsername("Roy")).Returns(user);
         
         var context = new DefaultHttpContext();
         var identity = new System.Security.Claims.ClaimsIdentity(new[]
@@ -39,6 +39,6 @@ public class UserMiddlewareTests
         await middleware.Invoke(context, mockRepo.Object);
         
         Assert.Null(context.Items["User"]);
-        mockRepo.Verify(r => r.FindFromToken(It.IsAny<string>()), Times.Never);
+        mockRepo.Verify(r => r.FindFromUsername(It.IsAny<string>()), Times.Never);
     }
 }
