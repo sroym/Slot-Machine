@@ -28,4 +28,17 @@ public class UserMiddlewareTests
         
         Assert.Equal(user, context.Items["User"]);
     }
+    
+    [Fact]
+    public async Task 沒有username_不放User進HttpContext()
+    {
+        var mockRepo = new Mock<UserRepositoryGateway>();
+        var context = new DefaultHttpContext();
+        
+        var middleware = new UserMiddleware(_ => Task.CompletedTask, mockRepo.Object);
+        await middleware.Invoke(context);
+        
+        Assert.Null(context.Items["User"]);
+        mockRepo.Verify(r => r.FindFromToken(It.IsAny<string>()), Times.Never);
+    }
 }
