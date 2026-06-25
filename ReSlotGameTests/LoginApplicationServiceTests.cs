@@ -15,7 +15,7 @@ public class LoginApplicationServiceTests
         var mockRepo = new Mock<UserRepositoryGateway>();
         var mockJwt = new Mock<IJwtService>();
         var user = new User("Roy");
-        mockRepo.Setup(r => r.FindFromUsername("Roy")).Returns(user);
+        mockRepo.Setup(r => r.FindFromUsernameAndPassword("Roy", "password7777")).Returns(user);
         mockJwt.Setup(j => j.GenerateToken("Roy")).Returns("fake-token");
     
         var service = new LoginApplicationService(mockRepo.Object, mockJwt.Object);

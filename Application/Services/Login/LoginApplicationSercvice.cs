@@ -18,7 +18,7 @@ public class LoginApplicationService :  ILoginApplicationService
 
     public string Login(string username, string password)
     {
-        var user = _userRepository.FindFromUsername(username);
+        var user = _userRepository.FindFromUsernameAndPassword(username, password);
         if (user == null) throw new NotFoundUserException();
         return _jwtService.GenerateToken(username);
     }
