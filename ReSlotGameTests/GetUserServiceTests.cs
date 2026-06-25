@@ -1,5 +1,6 @@
 using Application.Exceptions;
 using Application.Services.GetUser;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -41,5 +42,22 @@ public class GetUserControllerTests
     
         Assert.Equal("Roy", value.Name);
         Assert.Equal(1000, value.UserMoney);
+    }
+    
+    [Fact]
+    public void GetUser_WhenUserFound_shouldReturnUserResponse()
+    {
+        var mockRepo = new Mock<UserRepositoryGateway>();
+        var mockHttpContext = new Mock<IHttpContextAccessor>();
+        var user = new User("Roy");
+        user.SetBet(1000);
+        
+        mockHttpContext.Setup(h => h.HttpContext!.Items["User"]).Returns(user);
+        
+        var service = new GetUserService(mockRepo.Object, mockHttpContext.Object);
+        var result = service.GetUser();
+        
+        Assert.Equal("Roy", result.Name);
+        Assert.Equal(1000, result.UserMoney);
     }
 }
